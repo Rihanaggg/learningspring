@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog post</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <main>
+        <header th:insert="forum/fragments.html :: navbar"></header>
+        <h1>All Posts</h1>
+        <div class="posts" th:each="post :${posts}">
+            <div class="post">
+                <a th:href="@{/forum/post/{id}(id = ${post.id})}">
+                    <h2><span th:text="${post.title}"></span></h2>
+                </a>
+                <h3 class="italic">Post by <span class="userId" th:text="${post.author.name}">John Doe</span></h1>
+                    <h3 class="italic">Updated at: <span
+                            th:text="${#calendars.format(post.updatedAt, 'dd/MMM/yyyy HH:mm z')}"></span></h3>
+                    <p th:text="${post.content}">This is a post.</p>
+                    <p>Likes: <span th:text="${post.likesCount}"></span></p>
+                    <div class="button-container">
+                        <form method="post" action="#" th:action="@{/forum/post/{id}/like(id = ${post.id})}">
+                            <button type="submit" value="Like!" class="like-button"><i
+                                    class="fa fa-thumbs-up "></i></button>
+                        </form>
+
+                        <!-- Add Favorite Button -->
+                        <form method="post" action="#" th:action="@{/forum/post/{id}/fav(id=${post.id})}"
+                            onsubmit="showAlertFav()">
+                            <input type="hidden" th:name="commenterName" th:value="${commenterName}">
+                            <button type="submit" value="Favorite" class="like-button "><i class="fa fa-bookmark"></i></button>
+                        </form>
+                        <!--Mute button-->
+                        <form method="post" action="#" th:action="@{/forum/post/{id}/mute(id=${post.id})}"
+                            onsubmit="showAlertMute()">
+                            <input type="hidden" th:name="commenterName" th:value="${commenterName}">
+                            <button type="submit" value="Mute" class="like-button"><i
+                                    class="fa fa-bell-slash"></i></button>
+                        </form>
+                        <div th:if="${FavMessage}" class="alert">
+                            <p th:text="${FavMessage}"></p>
+                        </div>
+
+                        <div th:if="${MuteMessage}" class="alert">
+                            <p th:text="${MuteMessage}"></p>
+                        </div>
+                    </div>
+                    <a th:href="@{/forum/post/{id}(id = ${post.id})}">
+                        <h3><span th:text="${post.commentsCount}"></span> Comments</h1>
+                    </a>
+                    <form action="#" th:action="@{/forum/post/{id}/comment(id = ${post.id})}" method="post">
+                        <input name="content" type="text">
+                        <input type="submit" value="Add Comment">
+                    </form>
+            </div>
+        </div>
+    </main>
+    <script>
+        const symbol = document.querySelector(".name").innerText.charAt(0).toUpperCase();
+        document.querySelector(".avatar-text").innerHTML = symbol;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var alertElement = document.querySelector('.alert');
+
+            if (alertElement) {
+                setTimeout(function () {
+                    alertElement.classList.add('show-dialog');
+
+                    setTimeout(function () {
+                        alertElement.classList.remove('show-dialog');
+                    }, 2000);
+                }, 500); // Adjust the delay (in milliseconds) as needed
+            }
+        });
+    </script>
+</body>
+
+</html>

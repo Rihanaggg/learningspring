@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blog post</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<main th:object="${post}">
+		<header th:insert="forum/fragments.html :: navbar"></header>
+		<h2><span th:text="${post.title}"></span></h1>
+		<h3 class="italic">Post by <span class="userId" th:text="*{author.name}">John Doe</span></h1>
+		<h3 class="italic">Updated at: <span th:text="${#calendars.format(post.updatedAt, 'dd/MMM/yyyy HH:mm z')}"></span></h3>
+		<p th:text="*{content}">This is a post.</p>
+		<p>Likes: <span th:text="${post.likesCount}">0</span></p>
+
+		<!-- <div class="button-container">
+		<form method="post" action="#" th:action="@{/forum/post/{id}/like(id = ${post.id})}">
+			<button type="submit" value="Like!" class="like-button"><i class="fa fa-thumbs-up "></i></button>
+		</form>
+
+		//Add Favorite Button 
+		<form method="post" action="#" th:action="@{/forum/post/{id}/fav(id=${post.id})}" onsubmit="showAlertFav()">
+			<input type="hidden" th:name="commenterName" th:value="${commenterName}">
+			<button type="submit" value="Favorite" class="like-button "><i class="fa fa-heart fav-btn"></i></button>
+		</form>
+	//Mute button
+		<form method="post" action="#" th:action="@{/forum/post/{id}/mute(id=${post.id})}" onsubmit="showAlertMute()">
+			<input type="hidden" th:name="commenterName" th:value="${commenterName}">
+			<button type="submit" value="Mute" class="like-button"><i class="fa fa-bell-slash"></i></button>
+		</form>
+	    </div> -->
+		
+		<h3>Comments:</h3>
+		<form action="#" th:action="@{/forum/post/{id}/comment(id = ${post.id})}" method="post">
+			<input name="content" type="text">
+			<input type="submit" value="Add Comment">
+		</form>
+		<ul th:each="comment : ${comments}">
+			<li th:class="${comment.level}">
+				<div class = "border">
+					<p class="userId italic" th:text="${comment.user.name}"></p>
+					<p th:text="${comment.content}"></p>
+				</div>
+				<h5 onclick="toggleForm(this)">Reply ➡</h5>
+				<form hidden="true" action="#" th:action="@{/forum/post/{id}/reply/{parentId}(id = ${post.id}, parentId = ${comment.id})}" method="post">
+					<input name="content" type="text">
+					<input type="submit" value="Submit">
+				</form>
+			</li>
+		</ul>
+	</main>
+
+	<script>
+		function toggleForm(obj){
+			obj.nextElementSibling.hidden = !obj.nextElementSibling.hidden
+		}
+		for(let i = 0; i < 100; i++){
+			comments = document.getElementsByClassName(i);
+			for(let comment of comments){
+				comment.style.paddingLeft = 50*i + "px";
+			}
+		}
+	</script>
+	<script>
+        const symbol = document.querySelector(".name").innerText.charAt(0).toUpperCase();
+        document.querySelector(".avatar-text").innerHTML = symbol;
+    </script>
+</body>
+</html>

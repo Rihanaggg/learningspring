@@ -1,0 +1,259 @@
+* {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.border {
+    border-left: 2px solid black;
+    padding-left: 10px;
+}
+.userId {
+    color: blue;
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+/* We don't want any links to be underlined. Let's remove that globally */
+a {
+text-decoration: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+main {
+    padding-top: calc(4rem + 10px);
+}
+
+.navbar {
+    background-color: #36454F;
+    display: flex;
+    /* let's align the items so everything is nice and centered */
+    margin: 0;
+    width: 100%;
+    align-items: center;
+}
+
+/* We want all links in the navbar to be #e7e7e7 */
+.navbar a {
+    color: #e7e7e7;
+}
+
+.navbar ul {
+    /* Let's reset the margin and padding of the list so it's is flush. */
+    margin: 0;
+    padding: 0;
+    /* Let's remove the bullet points */
+    list-style-type: none;
+    /* display the list flex and align the items centered */
+    display: flex;
+    align-items:center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.navbar .brand {
+    /*Let's make the anchor display block.
+        This will ensure when we get the full width of the container.
+    */
+    display: block;
+    color: #e7e7e7;
+    /* Remove padding from top/bottom and add 24px padding right/left */
+    /* padding: 0 24px;
+    font-size: 24px; */
+}
+
+.navbar ul li a {
+    color: #e7e7e7;
+    /*Let's make the anchor display block.
+        This will ensure when we hover, focus, or is active we get the full width and height 
+        of the container.
+    */
+    display: block;
+    text-decoration: none;
+}
+
+/* When a user hovers, focuses or if the link is active change the background */
+.navbar ul a:hover,
+.navbar ul a:focus,
+.navbar ul .active {
+    background-color: #272727;
+}
+
+.user-details-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-details-wrapper:hover {
+    cursor: pointer;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+.user-details-wrapper .user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    background-color: tomato;
+}
+
+.user-details .name {
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: white;
+}
+
+.posts {
+    margin: 20px 0;
+}
+
+.post {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.post a {
+    text-decoration: none;
+}
+
+.post h2 {
+    margin-bottom: 10px;
+}
+
+.post h3 {
+    color: #555;
+    margin-bottom: 5px;
+}
+
+
+
+/* addding fav-btn styles */
+.like-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.like-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the button container */
+.button-container {
+    display: flex;
+    /* Display buttons in a row */
+    gap: 10px;
+    /* Spacing between buttons */
+}
+
+.fav-btn{
+    color: #dc3545;
+}
+
+/* Style for the Like button */
+.like-button {
+    background-color: #007bff;
+    /* Blue color */
+    color: #fff;
+    /* White text color */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the Favorite button */
+.favorite-button {
+    background-color: #28a745;
+    /* Green color */
+    color: #fff;
+    /* White text color */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the Mute button */
+.mute-button {
+    background-color: #dc3545;
+    /* Red color */
+    color: #fff;
+    /* White text color */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* success message pop up  */
+.alert {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.show-dialog {
+    display: block;
+}
+
+.navbar ul ul {
+    display: none;
+}
+.navbar ul li:hover > ul {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #423c3c;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
